@@ -73,7 +73,10 @@ Symplectic geometry provides the mathematical framework for understanding Hamilt
 
 $$\omega = \sum_i dq_i \wedge dp_i$$
 
-![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Symplectic.png)
+<p align="center">
+  <img src="[https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Symplectic.png]" width="600" alt="Alt Text">
+</p>
+
 
 A frictionless pendulum is one of the most basic forms of a symplectic space. Velocity and angle are the two components that describe the movements of a pendulum. We can map this in a 2D space as a trajectory.
 
@@ -89,7 +92,10 @@ where $\Delta t$ is analogous to the learning rate in optimization.
 ## Hamiltonian Optimization Algorithm
 Our implementation translates these physical principles into optimization:
 
-![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/HamiltonianSystems.png)
+<p align="center">
+  <img src="[https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/HamiltonianSystems.png]" width="600" alt="Alt Text">
+</p>
+
 
 **Momentum Update:**
 
