@@ -28,7 +28,8 @@ stable optimization trajectories. In quantum mechanics, Hamiltonians govern the 
 wavefunctions, exploring all possible states. Similarly, in optimization, this could lead to better
 exploration of the parameter space. 
 
-![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Basic.png)
+<img src="https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Basic.png" width="500" alt="Alt Text">
+
 
 For example, in a frictionless pendulum the total energy, it is the sum of potential and kinetic energy is conserved trough its movement.
 
