@@ -74,7 +74,7 @@ Symplectic geometry provides the mathematical framework for understanding Hamilt
 $$\omega = \sum_i dq_i \wedge dp_i$$
 
 <p align="center">
-  <img src="[https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Symplectic.png]" width="600" alt="Alt Text">
+  <img src="https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Symplectic.png" width="600" alt="Alt Text">
 </p>
 
 
@@ -93,7 +93,7 @@ where $\Delta t$ is analogous to the learning rate in optimization.
 Our implementation translates these physical principles into optimization:
 
 <p align="center">
-  <img src="[https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/HamiltonianSystems.png]" width="600" alt="Alt Text">
+  <img src="https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/HamiltonianSystems.png" width="600" alt="Alt Text">
 </p>
 
 
