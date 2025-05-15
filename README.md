@@ -525,7 +525,7 @@ If you use Hamiltonian AI in your research, please cite our paper:
 
 ```BibTex
 @article{marin2024optimizing,
-  title={Optimizing AI Reasoning: A Hamiltonian Dynamics Approach to Multi-Hop Question Answering},
+  title={Geometric Analysis of Reasoning Trajectories: A Phase Space Approach to Understanding Valid and Invalid Multi-Hop Reasoning in LLMs},
   author={Marin, Javier},
   journal={arXiv preprint arXiv:2410.04415},
   year={2024}
