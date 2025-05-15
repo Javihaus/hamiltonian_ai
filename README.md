@@ -424,7 +424,7 @@ The `evaluate_model` function returns:
 
 For theoretical foundations and empirical results:
 - [Hamiltonian Neural Networks for Robust Out-of-Time Credit Scoring](https://arxiv.org/abs/2410.10182)
-- [Optimizing AI Reasoning: A Hamiltonian Dynamics Approach to Multi-Hop Question Answering](https://arxiv.org/abs/2410.04415)
+- [Geometric Analysis of Reasoning Trajectories: A Phase Space Approach to Understanding Valid and Invalid Multi-Hop Reasoning in LLMs](https://arxiv.org/abs/2410.04415)
 
 
 ## Examples
