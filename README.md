@@ -126,7 +126,10 @@ $\eta$: learning rate
 
 $\epsilon$: small constant for numerical stability
 
-![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/HamiltoniainOptimization.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/HamiltoniainOptimization.png" width="600" alt="Alt Text">
+</p>
+
 
 ## Hamiltonian Loss Function
 Our custom loss function combines traditional loss with a Hamiltonian-inspired regularization term:
