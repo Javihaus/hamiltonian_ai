@@ -160,7 +160,7 @@ $$T(p) = \frac{1}{2}|p|^2$$
 ## Features
 
 ### HamiltonianNN
-A neural network architecture incorporating Hamiltonian principles:
+A neural network architecture incorporating Hamiltonian formalism (assuming there is a conveserved quantity analogous to energy in phisycal systems):
 
 ```python
 model = HamiltonianNN(
