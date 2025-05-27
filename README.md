@@ -4,7 +4,7 @@ Hamiltonian AI is a Python library that implements Hamiltonian-inspired approach
 
 # Theoretical Background
 
-Note: For a complete visual presentation of the theoretical foundations, see our detailed presentation.
+Note: For a complete visual presentation of the theoretical foundations, see our detailed presentation here (https://github.com/Javihaus/hamiltonian_ai/blob/main/docs/presentations/Hamiltonian%20Optimization_v1.pdf).
 
 ## The Optimization Problem
 In machine learning, optimization seeks to find parameters $\theta^*$ that minimize an objective function:
