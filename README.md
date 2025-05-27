@@ -38,9 +38,9 @@ We adapt this principle for optimization:
 
 **State Space Variables**
 
-Position ($q$): Represents model parameters
-Momentum ($p$): Represents parameter update velocities
-Time ($t$): Represents optimization steps
+- Position ($q$): Represents model parameters
+- Momentum ($p$): Represents parameter update velocities
+- Time ($t$): Represents optimization steps
 
 
 **Hamiltonian Function**
