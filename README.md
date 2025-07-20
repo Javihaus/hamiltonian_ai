@@ -13,48 +13,62 @@
 
 Hamiltonian AI is a Python library that implements Hamiltonian-inspired approaches for optimizing AI models. By leveraging principles from Hamiltonian mechanics, this library provides novel optimization techniques that enhance model performance and stability in both multi-hop question answering and credit scoring tasks.
 
-# Theoretical Background
+## What Problem Does This Solve?
+Standard neural network optimization faces fundamental mathematical challenges:
+
+**Instability**: Gradient descent can oscillate or diverge in complex loss landscapes
+Poor exploration: Traditional optimizers often get trapped in suboptimal local minima
+Inconsistent convergence: Training dynamics vary unpredictably across different problems
+
+**How We Solve It**: By borrowing mathematical principles from Hamiltonian mechanics, we create optimization algorithms that preserve geometric structure and provide more stable, predictable training dynamics.
 
 Note: For a complete visual presentation of the theoretical foundations, see our detailed presentation here (https://github.com/Javihaus/hamiltonian_ai/blob/main/docs/presentations/Hamiltonian%20Optimization_v1.pdf).
 
-## The Optimization Problem
-In machine learning, optimization seeks to find parameters $\theta^*$ that minimize an objective function:
-
-$$\theta^* = \text{argmin } f(x) \text{ for } \theta \in \Omega$$
-
-Traditional optimization faces several challenges:
-
-- Non-convexity of the objective function
-- High dimensionality
-- Ill-conditioning
-
-For optimization functions that are $\alpha$-strongly convex and $\beta$-strongly smooth, we have:
-
-$$\frac{\alpha}{2}|x - y|^2 \leq f(y) - f(x) - \langle\nabla f(x), y - x\rangle \leq \frac{\beta}{2}|x - y|^2$$
-
-## Hamiltonian Mechanics in Optimization
-### Basic Principles
-Hamiltonians in physics describe systems that conserve total energy, potentially leading to more
-stable optimization trajectories. In quantum mechanics, Hamiltonians govern the evolution of
-wavefunctions, exploring all possible states. Similarly, in optimization, this could lead to better
-exploration of the parameter space. 
-
+## The Physical Analogy
+In classical mechanics, a pendulum's motion is governed by energy conservation. As it swings, it exchanges potential energy (height) for kinetic energy (motion), but total energy remains constant.
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Basic.png" width="400" alt="Alt Text">
+  <img src="https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Basic.png" width="400" alt="Pendulum phase space trajectory showing energy conservation">
+  <br><em>Figure: A frictionless pendulum conserves total energy, creating stable, predictable trajectories in phase space</em>
 </p>
 
-For example, in a frictionless pendulum the total energy, it is the sum of potential and kinetic energy is conserved trough its movement.
+We adapt this principle for optimization
 
-We adapt this principle for optimization:
+### The Mathematical Bridge
+We map this physical intuition to neural network optimization:
+<table>
+  <thead>
+    <tr>
+      <th style="background-color: #f0f0f0; padding: 10px; border: 1px solid #ddd;">Physical System</th>
+      <th style="background-color: #f0f0f0; padding: 10px; border: 1px solid #ddd;">Neural Network Optimization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 8px; border: 1px solid #ddd;"><strong>Position (q)</strong></td>
+      <td style="padding: 8px; border: 1px solid #ddd;">Model parameters (θ)</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border: 1px solid #ddd;"><strong>Momentum (p)</strong></td>
+      <td style="padding: 8px; border: 1px solid #ddd;">Parameter update velocities</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border: 1px solid #ddd;"><strong>Potential Energy</strong></td>
+      <td style="padding: 8px; border: 1px solid #ddd;">Loss function value</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border: 1px solid #ddd;"><strong>Kinetic Energy</strong></td>
+      <td style="padding: 8px; border: 1px solid #ddd;">Gradient magnitude</td>
+    </tr>
+    <tr>
+      <td style="padding: 8px; border: 1px solid #ddd;"><strong>Total Energy</strong></td>
+      <td style="padding: 8px; border: 1px solid #ddd;">Combined optimization "energy"</td>
+    </tr>
+  </tbody>
+</table>
 
-**State Space Variables**
-
-- Position ($q$): Represents model parameters
-- Momentum ($p$): Represents parameter update velocities
-- Time ($t$): Represents optimization steps
 
 
-**Hamiltonian Function**
+### Hamiltonian Formulation
 
 $$\begin{align*}H(q, p) = T(p) + V(q)\end{align*}$$
 
@@ -64,111 +78,71 @@ $T(p)$: Kinetic energy (parameter update costs)
 
 $V(q)$: Potential energy (loss function)
 
+For neural network optimization, we define:
 
-**Hamilton's Equations**
-
-$$\begin{align*}
-\dot{q} &= \frac{\partial H}{\partial p} \
-\dot{p} &= -\frac{\partial H}{\partial q}
-\end{align*}$$
-
-For systems with $n$ degrees of freedom:
-
-$$\begin{align*}
-\dot{q}_i &= \frac{\partial H}{\partial p_i}(t, q, p) \
-\dot{p}_i &= -\frac{\partial H}{\partial q_i}(t, p, q)
-\end{align*}$$
-
-### Symplectic Geometry
-Symplectic geometry provides the mathematical framework for understanding Hamiltonian dynamics. In local coordinates $(q_i, p_i)$, a standard symplectic form is:
-
-$$\omega = \sum_i dq_i \wedge dp_i$$
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Symplectic.png" width="600" alt="Alt Text">
-</p>
-
-
-A frictionless pendulum is one of the most basic forms of a symplectic space. Velocity and angle are the two components that describe the movements of a pendulum. We can map this in a 2D space as a trajectory.
-
-The Symplectic Euler method, which we implement, takes the form:
-
-$$\begin{align*}
-p_{n+1} &= p_n - \Delta t \times \frac{\partial H}{\partial q}(q_n, p_{n+1}) \
-q_{n+1} &= q_n + \Delta t \times \frac{\partial H}{\partial p}(q_n, p_{n+1})
-\end{align*}$$
-
-where $\Delta t$ is analogous to the learning rate in optimization.
-
-## Hamiltonian Optimization Algorithm
-Our implementation translates these physical principles into optimization:
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/HamiltonianSystems.png" width="600" alt="Alt Text">
-</p>
-
-
-**Momentum Update:**
-
-$$m_t = \beta \times m_{t-1} + (1-\beta) \times g_t$$
+$$\begin{align*}H(\theta, m) = \frac{1}{2}∥m∥^2 + L(\theta)\end{align*}$$
 
 where:
 
-$\beta$: momentum decay factor
-$g_t$: current gradient
+$\theta$: model parameters (analogous to position)
 
+$m$: momentum terms (analogous to velocity)
 
-**Hamiltonian Energy:**
+$L(\theta)$: loss function (analogous to potential energy)
 
-$$\begin{align*}K&= \frac{1}{2}v^2 \text{ (Kinetic)}\end{align*}$$
+## Hamilton's Equations for Optimization
+Classical Hamilton's equations govern how systems evolve:
 
-$$\begin{align*}V&= \frac{1}{2}g^2 \text{ (Potential)}\end{align*}$$
+$$\begin{align}
+\frac{dq}{dt} &= \frac{\partial H}{\partial p} \
+\frac{dp}{dt} &= -\frac{\partial H}{\partial q}
+\end{align}$$
+These equations capture a profound physical principle: systems evolve along paths that preserve their geometric structure. For neural network optimization, we translate this directly:
+$$\begin{align}
+\frac{d\theta}{dt} &= \frac{\partial H}{\partial m} = m \
+\frac{dm}{dt} &= -\frac{\partial H}{\partial \theta} = -\nabla L(\theta)
+\end{align}$$
 
-$$\begin{align*}H&= K + V \text{ (Hamiltonian)}\end{align*}$$
+Physical Interpretation: Just as a pendulum's position changes according to its momentum, our model parameters $\theta$ update according to their momentum $m$. And just as momentum changes due to forces (negative gradient of potential energy), our momentum updates according to the negative gradient of the loss function.
 
+Why This Matters: This isn't just mathematical elegance - it provides a principled way to maintain optimization stability. Traditional gradient descent can be viewed as a crude approximation that ignores momentum conservation, leading to oscillations and instability.
 
-**Parameter Update:**
+### Discrete Implementation
+For practical computation, we discretize these continuous equations using symplectic integration:
 
-$$\theta_t = \theta_{t-1} - \frac{\eta \times m_t}{\sqrt{H_t + \epsilon}}$$
+$$\begin{align}
+m_{t+1} &= m_t - \eta \nabla L(\theta_t) \
+\theta_{t+1} &= \theta_t + \eta m_{t+1}
+\end{align}$$
 
-where:
+Notice the crucial detail: we use the *updated* momentum $m_{t+1}$ in the parameter update. This ordering preserves the symplectic structure and maintains long-term stability.
 
-$\eta$: learning rate
-
-$\epsilon$: small constant for numerical stability
+### Symplectic Integration: Preserving Structure
+Standard numerical integration methods can destroy the geometric properties that make Hamiltonian systems stable. Symplectic integration specifically preserves the phase space structure.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/HamiltoniainOptimization.png" width="600" alt="Alt Text">
+  <img src="https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Symplectic.png" width="600" alt="Symplectic manifold showing preservation of geometric structure">
+  <br><em>Figure 3: Symplectic geometry preserves phase space areas and trajectories, ensuring optimization stability over long timescales</em>
 </p>
 
+The symplectic form in local coordinates is:
 
-## Hamiltonian Loss Function
-Our custom loss function combines traditional loss with a Hamiltonian-inspired regularization term:
+$$\begin{align}
+\omega = \sum_i d\theta_i \land dm_i​
+\end{align}$$
 
-$$H_{loss}(\theta) = L_{base}(\theta) + \lambda \times R(\theta)$$
+This mathematical object captures the idea that parameter space has an inherent geometric structure. Our optimization algorithm respects this structure, leading to:
 
-where:
+- 1- Energy conservation: Total "energy" doesn't drift due to numerical errors
+- 2- Volume preservation: The optimization doesn't artificially expand or contract parameter regions
+- 3- Long-term stability: No accumulation of numerical artifacts over many iterations
 
-$L_{base}(\theta)$: Base loss function (e.g., cross-entropy)
+## Benefits of Hamiltonian Approach
+- 1- Energy Conservation: The conservation of the Hamiltonian leads to more stable optimization trajectories.
+- 2- Momentum-Based Exploration: The system can "roll past" local minima while maintaining exploratory behavior.
+- 3- Geometric Structure Preservation: Symplectic integration preserves the geometric properties of the optimization space.
 
-$R(\theta)$: Regularization term analogous to potential energy
-
-$\lambda$: Regularization coefficient
-
-The regularization term takes the form:
-
-$$R(\theta) = \frac{1}{2}|\theta|^2$$
-
-This is analogous to potential energy in Hamiltonian systems:
-
-$$T(p) = \frac{1}{2}|p|^2$$
-
-### Benefits of Hamiltonian Approach
-- Energy Conservation: The conservation of the Hamiltonian leads to more stable optimization trajectories.
-- Momentum-Based Exploration: The system can "roll past" local minima while maintaining exploratory behavior.
-- Geometric Structure Preservation: Symplectic integration preserves the geometric properties of the optimization space.
-
-## Features
+## Practical application
 
 ### HamiltonianNN
 A neural network architecture incorporating Hamiltonian formalism (assuming there is a conveserved quantity analogous to energy in phisycal systems):
