@@ -8,7 +8,7 @@
 # Hamiltonian Neural Network
 
 <div align="center">
-  <img width="500" height="450" alt="Temporal Bandwidth Prediction Model" src="research/images/prediction.png" />
+  <img width="500" height="450" alt="Hamiltonian Optimization in NN" src="docs/images/HamiltoniainOptimization.png" />
 </div>
 
 Hamiltonian AI is a Python library that implements Hamiltonian-inspired approaches for optimizing AI models. By leveraging principles from Hamiltonian mechanics, this library provides novel optimization techniques that enhance model performance and stability in both multi-hop question answering and credit scoring tasks.
